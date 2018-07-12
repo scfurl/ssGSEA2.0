@@ -47,7 +47,7 @@ ssGSEA2 <- function (
                      statistic           = c("area.under.RES", "Kolmogorov-Smirnov"), ## test statistic
                      output.score.type   = c("NES", "ES"),
                      nperm               = 1000,    ## number of random permutations for NES case
-                     combine.mode        = c("combine.off", "combine.replace", "combine.add"),
+                     combine.mode        = c("combine.add", "combine.off", "combine.replace"),
                      ## "combine.off" do not combine *_UP and *_DN versions in a single score.
                      ## "combine.replace" combine *_UP and *_DN versions in a single score.
                      ## "combine.add" combine *_UP and *_DN versions in a single score and
@@ -57,7 +57,7 @@ ssGSEA2 <- function (
                      #fdr.pvalue          = TRUE,    ## output adjusted (FDR) p-values
                      global.fdr          = FALSE,   ## if TRUE calculate global FDR; else calculate FDR sample-by-sample
 
-                     par=F,
+                     par=T,
                      spare.cores=1,
                      export.signat.gct=T, ## if TRUE gct files with expression values for each signature will be generated
                      param.file=T,
@@ -100,13 +100,16 @@ ssGSEA2 <- function (
         paste('sample.norm.type:', sample.norm.type, sep='\t'),
         paste('weight:', weight, sep='\t'),
         paste('statistic:', statistic, sep='\t'),
+        paste('combine.mode:', combine.mode, sep='\t'),
         paste('output.score.type', output.score.type, sep='\t'),
         paste('nperm:', nperm, sep='\t'),
         paste('global.fdr:', global.fdr, sep='\t'),
         paste('min.overlap:', min.overlap, sep='\t'),
         paste('correl.type:', correl.type, sep='\t'),
         paste('export.signat.gct:', export.signat.gct, sep='\t'),
-        paste('run.parallel:', par, sep='\t')
+        paste('run.parallel:', par, sep='\t'),
+        paste('spare.cores:', spare.cores, sep='\t'),
+        paste('use.cores:', (detectCores() - spare.cores), sep='\t')
       )
       writeLines(param.str, con=paste(output.prefix, 'parameters.txt', sep='_'))
     }

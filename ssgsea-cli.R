@@ -31,7 +31,7 @@ option_list <- list(
   make_option( c("-e", "--export"), action='store', type='logical',  dest='export.signat.gct', help='For each signature export expression GCT files.', default = TRUE),
   make_option( c("-g", "--globalfdr"), action='store', type='logical',  dest='global.fdr', help='If TRUE global FDR across all data columns is calculated.', default = FALSE),
   make_option( c("-l", "--lightspeed"), action='store', type='logical',  dest='par', help='If TRUE processing wil be parallized across gene sets. (I ran out of single letters to define parameters...)', default = TRUE),
-  make_option( c("-f", "--free"), action='store', type='numeric',  dest='spare.cores', help='Leave this number of cores free', default = TRUE)
+  make_option( c("-f", "--free"), action='store', type='numeric',  dest='spare.cores', help='Leave this number of cores free', default = 0)
   )
 
 # parse command line parameters
