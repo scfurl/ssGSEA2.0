@@ -3,9 +3,17 @@ options( warn = -1 )
 suppressPackageStartupMessages(library("optparse"))
 
 # parse the directory this file is located
-this.file.dir <- commandArgs()[4]
+if(is.na(commandArgs()[4])){
+  # library(rstudioapi)    
+  # this.file.dir <- rstudioapi::getActiveDocumentContext()$path
+  this.file.dir <- sys.frame(tail(grep('source',sys.calls()),n=1))$ofile
+}else{
+  this.file.dir <- commandArgs()[4]
+}
+# this.file <- sys.frame(tail(grep('source',sys.calls()),n=1))$ofile
+# this.file.dir <- dirname(this.file)
 this.file.dir <- sub('^(.*(/|\\\\)).*', '\\1', sub('.*?\\=','', this.file.dir))
-#cat('DIRECTORY: ',this.file.dir, '\n')
+cat('DIRECTORY: ',this.file.dir, '\n')
 
 # specify command line arguments
 option_list <- list(
@@ -23,13 +31,14 @@ option_list <- list(
   make_option( c("-e", "--export"), action='store', type='logical',  dest='export.signat.gct', help='For each signature export expression GCT files.', default = TRUE),
   make_option( c("-g", "--globalfdr"), action='store', type='logical',  dest='global.fdr', help='If TRUE global FDR across all data columns is calculated.', default = FALSE),
   make_option( c("-l", "--lightspeed"), action='store', type='logical',  dest='par', help='If TRUE processing wil be parallized across gene sets. (I ran out of single letters to define parameters...)', default = TRUE)
+  make_option( c("-f", "--free"), action='store', type='numeric',  dest='spare.cores', help='Leave this number of cores free', default = TRUE)
   )
 
 # parse command line parameters
 opt <- parse_args( OptionParser(option_list=option_list) )
 
 # hard-coded parameters
-spare.cores <- 0 # use all available cpus
+# spare.cores <- 0 # use all available cpus
 log.file <- paste(opt$output.prefix, '_ssgsea.log.txt', sep='')
 
 ## #####################################
