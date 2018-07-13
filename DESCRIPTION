@@ -1,0 +1,9 @@
+Package: ssGSEA2.0
+Title: ssGSEA2.0
+Version: 0.0.0.9000
+Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
+Description: R package for ssGSEA analysis. Forked from https://github.com/karstenkrug/ssGSEA2.0
+Depends: R (>= 3.1.0)
+License: Whatever
+Encoding: UTF-8
+LazyData: true
