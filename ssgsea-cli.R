@@ -30,13 +30,13 @@ option_list <- list(
   #make_option( c("-f", "--fdr"), action='store', type='logical',  dest='fdr.pvalue', help='Report FDR-corrected p-values.', default = TRUE),
   make_option( c("-e", "--export"), action='store', type='logical',  dest='export.signat.gct', help='For each signature export expression GCT files.', default = TRUE),
   make_option( c("-g", "--globalfdr"), action='store', type='logical',  dest='global.fdr', help='If TRUE global FDR across all data columns is calculated.', default = FALSE),
-  make_option( c("-l", "--lightspeed"), action='store', type='logical',  dest='par', help='If TRUE processing wil be parallized across gene sets. (I ran out of single letters to define parameters...)', default = TRUE),
-  make_option( c("-f", "--free"), action='store', type='numeric',  dest='spare.cores', help='Leave this number of cores free', default = 0)
+  make_option( c("-u", "--cores"), action='store', type='numeric',  dest='use.cores', help='Number of cores to use; Set to 1 to not run in parallel mode', default = 1)
   )
 
 # parse command line parameters
 opt <- parse_args( OptionParser(option_list=option_list) )
-
+if(opt$use.cores == 1){par <- FALSE}
+if(opt$use.cores > 1){par <- TRUE}
 # hard-coded parameters
 # spare.cores <- 0 # use all available cpus
 log.file <- paste(opt$output.prefix, '_ssgsea.log.txt', sep='')
@@ -64,8 +64,8 @@ res <- ssGSEA2(
 	export.signat.gct=opt$export.signat.gct,
 #	fdr.pvalue=opt$fdr.pvalue,
 	global.fdr=opt$global.fdr,
-  par=opt$par,
-  spare.cores=spare.cores,
+  par=par,
+  use.cores=opt$use.cores,
   log.file=log.file
 )
 

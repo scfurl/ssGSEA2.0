@@ -57,8 +57,8 @@ ssGSEA2 <- function (
                      #fdr.pvalue          = TRUE,    ## output adjusted (FDR) p-values
                      global.fdr          = FALSE,   ## if TRUE calculate global FDR; else calculate FDR sample-by-sample
 
-                     par=T,
-                     spare.cores=1,
+                     par=F,
+                     use.cores=1,
                      export.signat.gct=T, ## if TRUE gct files with expression values for each signature will be generated
                      param.file=T,
                      log.file='run.log') {
@@ -88,6 +88,8 @@ ssGSEA2 <- function (
     output.score.type <- match.arg(output.score.type)
     combine.mode <- match.arg(combine.mode)
     correl.type <- match.arg(correl.type)
+    if(use.cores == 1){par <- FALSE}
+    if(use.cores > 1){par <- TRUE}
 
     ## ###################################################
     ## parameter file
@@ -108,8 +110,7 @@ ssGSEA2 <- function (
         paste('correl.type:', correl.type, sep='\t'),
         paste('export.signat.gct:', export.signat.gct, sep='\t'),
         paste('run.parallel:', par, sep='\t'),
-        paste('spare.cores:', spare.cores, sep='\t'),
-        paste('use.cores:', (detectCores() - spare.cores), sep='\t')
+        paste('use.cores:', use.cores, sep='\t')
       )
       writeLines(param.str, con=paste(output.prefix, 'parameters.txt', sep='_'))
     }
@@ -762,7 +763,7 @@ ssGSEA2 <- function (
     ##
     if(par){
         ## register cores
-        cl <- makeCluster(detectCores() - spare.cores)
+        cl <- makeCluster(use.cores)
         registerDoParallel(cl)
 
         ######################
