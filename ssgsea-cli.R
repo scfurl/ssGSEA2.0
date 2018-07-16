@@ -43,7 +43,7 @@ log.file <- paste(opt$output.prefix, '_ssgsea.log.txt', sep='')
 
 ## #####################################
 ## source the actual script
-source(paste(this.file.dir, 'src/ssGSEA2.0.R', sep=''))
+source(paste(this.file.dir, 'R/ssGSEA2.0.R', sep=''))
 
 ## ######################################################################################################
 ##

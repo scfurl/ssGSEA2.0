@@ -7,3 +7,9 @@ Depends: R (>= 3.1.0)
 License: Whatever
 Encoding: UTF-8
 LazyData: true
+Imports:
+  gtools,
+  verification,
+  doParallel,
+  foreach,
+  magrittr
