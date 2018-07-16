@@ -1119,7 +1119,7 @@ if(export.signat.gct){
     V.GCT@mat <- data.matrix(score.matrix.2)
     V.GCT@rid <- gs.names.2
     V.GCT@cid <- sample.names
-    V.GCT@rdesc <- gs.descs.2
+    V.GCT@rdesc <- data.frame(Description=gs.descs.2)
     if(nrow(sample.descs) > 0)
       V.GCT@cdesc <- data.frame(sample.descs, stringsAsFactors = F)
     V.GCT@src <- gct.src
