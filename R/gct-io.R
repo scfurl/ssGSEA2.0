@@ -22,7 +22,7 @@ setClass("GCT",
            mat = "matrix",
            rid = "vector",
            cid = "vector",
-           rdesc = "character",
+           rdesc = "data.frame",
            cdesc = "data.frame",
            version = "character",
            src = "character",
@@ -456,7 +456,7 @@ write.gct <- function(ds, ofile, precision=5, appenddim=F, ver=NULL) {
     for (ii in 1:nr) {    
       # print rows
       cat(paste(c(ds@rid[ii],
-                  ds@rdesc[ii, 'Description'],
+                  ds@rdesc[ii, "Description"],
                   round(ds@mat[ii,],precision)),collapse='\t'),
           sep='\n',file=ofile,append=T)
     }
