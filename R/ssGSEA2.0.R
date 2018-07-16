@@ -62,7 +62,7 @@ ssGSEA2 <- function (
                      statistic           = c("area.under.RES", "Kolmogorov-Smirnov"), ## test statistic
                      output.score.type   = c("NES", "ES"),
                      nperm               = 1000,    ## number of random permutations for NES case
-                     combine.mode        = c("combine.add", "combine.off", "combine.replace"),
+                     combine.mode        = c("combine.off", "combine.replace", "combine.add"),
                      ## "combine.off" do not combine *_UP and *_DN versions in a single score.
                      ## "combine.replace" combine *_UP and *_DN versions in a single score.
                      ## "combine.add" combine *_UP and *_DN versions in a single score and
